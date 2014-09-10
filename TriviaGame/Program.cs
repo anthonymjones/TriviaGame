@@ -13,6 +13,8 @@ namespace TriviaGame
         {
             //The logic for your trivia game happens here
             List<Trivia> AllQuestions = GetTriviaList();
+
+            Console.ReadKey();
         }
 
 
@@ -23,7 +25,10 @@ namespace TriviaGame
             List<string> contents = File.ReadAllText("trivia.txt").Replace("\r", "").Split('\n').ToList();
 
             //Each item in list "contents" is now one line of the Trivia.txt document.
-            
+            foreach (var item in contents)
+            {
+
+            }
             //make a new list to return all trivia questions
             List<Trivia> returnList = new List<Trivia>();
             // TODO: go through each line in contents of the trivia file and make a trivia object.
