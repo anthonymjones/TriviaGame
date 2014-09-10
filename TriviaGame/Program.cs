@@ -13,47 +13,71 @@ namespace TriviaGame
         {
             //The logic for your trivia game happens here
             List<Trivia> AllQuestions = GetTriviaList();
-
+            //set var for incorrect answers
             int incorrect = 0;
+            //set var for correct answers
             int correct = 0;
-            int questionAsk = 10;
+            //set var for number of questions asked
+            int questionaAsked = 0;
+            //set var for question number
+            int number = 1;
+            //welcome to the game
             Console.WriteLine(@"Welcome to C# Trivia!
+
 I'll dish out 10 trivia questions and you type the answer and press enter.
+
 Are you ready? (press enter)");
             Console.ReadKey();
 
-            int number = 1;
-            while (questionAsk > 0)
+            //loop through until game has asked 10 questions
+            while (questionaAsked < 9)
             {
+                //create random number generator
                 Random rng = new Random();
+                //pick random number from 1 - 5000
                 int ranNum = rng.Next(0, 5001);
+                //set var for the single question/answer in the trivia.txt
                 var questNum = GetTriviaList()[ranNum];
-
+                //ask a question
                 Console.WriteLine(questNum.Question);
+                //get an answer
                 var userAnswer = Console.ReadLine().ToLower();
-
+                //got it right
                 if (userAnswer == questNum.Answer.ToLower())
                 {
+                    //tell them
                     Console.WriteLine("You got it!");
-                    questionAsk--;
+                    //add a question asked
+                    questionaAsked++;
+                    //increase the question number
                     number++;
+                    //add a correct answer
                     correct++;
-                    Console.WriteLine("The answer is: {0}", questNum.Answer);
+                    //confirm the correct answer
+                    Console.WriteLine("It's {0}!", questNum.Answer);
                 }
+                    //got it wrong
                 else
                 {
+                    //tell them
                     Console.WriteLine("Incorrect!");
-                    questionAsk--;
+                    //add a question asked
+                    questionaAsked++;
+                    //increase the question number
                     number++;
+                    //add an incorrect answer
                     incorrect++;
+                    //give them the right answer
                     Console.WriteLine("The answer is: {0}", questNum.Answer);
 
                 }
                 
             }
-            Console.WriteLine("You got {0}/10", correct, questionAsk, "right!" );
-            Console.WriteLine("You got {0}/10", incorrect, questionAsk, "wrong.");
-
+            Console.WriteLine("Game Over.");
+            //after the game, display how many correct and incorrect answers
+            Console.WriteLine("You got {0}/10", correct, questionaAsked, "right!" );
+            Console.WriteLine("You got {0}/10", incorrect, questionaAsked, "wrong.");
+            
             Console.ReadKey();
         }
 
